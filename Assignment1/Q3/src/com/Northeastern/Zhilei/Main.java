@@ -3,7 +3,7 @@ package com.Northeastern.Zhilei;
 public class Main {
 
     public static void main(String[] args) {
-        //Exercise 3 Swapping Nodes in a Linked List
+        //Q3 Swapping Nodes in a Linked List
         ListNode head3 = new ListNode(1);
         head3.next = new ListNode(2);
         head3.next.next = new ListNode(3);
