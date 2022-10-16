@@ -1,7 +1,9 @@
 package com.Northeastern.Zhilei;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class Main {
 
@@ -9,41 +11,30 @@ public class Main {
         TreeNode root = new TreeNode(1);
         root.left = new TreeNode(2);
         root.right = new TreeNode(3);
-        preOrder(root);
-        System.out.println(preList);
-
-        inOrder(root);
-        System.out.println(inList);
-
-        postOrder(root);
-        System.out.println(postList);
+        System.out.println(levelOrder(root));
     }
-    public static List<Integer> preList = new ArrayList<>();
-    public static void preOrder(TreeNode root) {
+    public static List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> answer = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
         if(root == null) {
-            return;
+            return answer;
         }
-        preList.add(root.val);
-        preOrder(root.left);
-        preOrder(root.right);
-    }
-    public static List<Integer> inList = new ArrayList<>();
-    public static void inOrder(TreeNode root) {
-        if(root == null) {
-            return;
+        queue.offer(root);
+        while(!queue.isEmpty()) {
+            int size = queue.size();
+            List<Integer> cur = new ArrayList<>();
+            while(size -- > 0) {
+                TreeNode curNode = queue.poll();
+                cur.add(curNode.val);
+                if(curNode.left != null) {
+                    queue.offer(curNode.left);
+                }
+                if(curNode.right != null) {
+                    queue.offer(curNode.right);
+                }
+            }
+            answer.add(cur);
         }
-        inOrder(root.left);
-        inList.add(root.val);
-        inOrder(root.right);
-    }
-
-    public static List<Integer> postList = new ArrayList<>();
-    public static void postOrder(TreeNode root) {
-        if(root == null) {
-            return;
-        }
-        postOrder(root.left);
-        postOrder(root.right);
-        postList.add(root.val);
+        return answer;
     }
 }
