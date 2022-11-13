@@ -34,6 +34,12 @@ public class Main {
         }
         if(root.left != null || root.right != null) {
             System.out.println(root.data);
+            if(root.left != null) {
+                root.left.parent = root;
+            }
+            if(root.right != null) {
+                root.right.parent = root;
+            }
         }
         populateParent(root.left);
         populateParent(root.right);
